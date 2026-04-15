@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quant Acuity</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding-top: 81px; /* offset for fixed header height */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* HEADER — sticky */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background-color: #ffffff;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo {
+      line-height: 1;
+      color: #111;
+    }
+
+    .quant, .acuity {
+      font-size: 28px;
+      font-weight: 280;
+      letter-spacing: 1px;
+    }
+
+    .acuity {
+      margin-left: 20px;
+    }
+
+    nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #111;
+      margin-left: 30px;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    /* HERO + SERVICES: both use flex with align-items: center for vertical middle alignment */
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;      /* ← vertical centering */
+      padding: 60px;
+      gap: 40px;
+    }
+
+    .text {
+      flex: 1;
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 400;
+      margin: 0 0 8px 0;
+      color: #111;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .welcome-static {
+      margin-right: 12px;
+      white-space: nowrap;
+    }
+
+    .rotating-wrapper {
+      display: inline-block;
+      min-width: 320px;
+      white-space: nowrap;
+    }
+
+    .rotating-phrase {
+      display: inline-block;
+      font-weight: 450;
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 1;
+      color: #0b2b4a;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    /* SERVICES SECTION — vertical middle alignment */
+    .services {
+      display: flex;
+      align-items: center;      /* ← vertical centering */
+      gap: 50px;
+      padding: 60px;
+    }
+
+    .services-content {
+      flex: 1;
+      font-size: 18px;
+      font-weight: 200;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    .services-content h2 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .services-content ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .services-content li {
+      margin-bottom: 10px;
+    }
+
+    /* CONTACT SECTION */
+    .contact-section {
+      padding: 60px;
+      background-color: #fafafa;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-header {
+      margin-bottom: 40px;
+    }
+
+    .contact-header h2 {
+      font-size: 28px;
+      font-weight: 400;
+      color: #111;
+      margin-bottom: 15px;
+    }
+
+    .contact-info-row {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 50px;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-label {
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .contact-value {
+      font-size: 18px;
+      color: #111;
+    }
+
+    .contact-form-wrapper {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    .form-left {
+      flex: 1;
+    }
+
+    .form-left h3 {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .form-left p {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .contact-form {
+      flex: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      font-family: inherit;
+      background: #fff;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #0b2b4a;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .send-btn {
+      background-color: #0b2b4a;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .send-btn:hover {
+      background-color: #1e3a5f;
+    }
+
+    .send-btn:active {
+      transform: scale(0.98);
+    }
+
+    .form-status {
+      margin-top: 20px;
+      font-size: 14px;
+      min-height: 24px;
+    }
+
+    .success-message {
+      color: #2e7d32;
+    }
+
+    .error-message {
+      color: #c62828;
+    }
+
+    /* scroll margin for anchor links */
+    #services, #contact {
+      scroll-margin-top: 100px;
+    }
+
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* consistent image styling: maintain aspect ratio, rounded corners, and prevent distortion */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* fixed width for images to maintain layout consistency, but responsive */
+    .container img {
+      width: 500px;
+      max-width: 45%;
+      flex-shrink: 0;
+    }
+
+    .services img {
+      width: 500px;
+      max-width: 45%;
+      flex-shrink: 0;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 900px) {
+      .contact-form-wrapper {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .container, .services, .contact-section {
+        padding: 40px 25px;
+      }
+
+      .contact-info-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .container img,
+      .services img {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding-top: 70px;
+      }
+      header {
+        padding: 15px 25px;
+      }
+      nav {
+        position: static;
+        transform: none;
+        margin-left: 20px;
+      }
+      nav a {
+        margin-left: 20px;
+      }
+      .rotating-wrapper {
+        min-width: 260px;
+      }
+      h1 {
+        font-size: 26px;
+      }
+      .container, .services {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .container img, 
+      .services img {
+        order: -1;      /* bring image on top for mobile if needed, but keeps centering */
+        margin-bottom: 20px;
+      }
+      .services {
+        flex-direction: column;
+      }
+      .services-content {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <div class="quant">Quant</div>
+    <div class="acuity">Acuity</div>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO / Home section: vertical alignment fixed -->
+<div id="home" class="container">
+  <div class="text">
+    <h1>
+      <span class="welcome-static">Welcome to</span>
+      <span class="rotating-wrapper">
+        <span id="dynamicPhrase" class="rotating-phrase">Quant Acuity</span>
+      </span>
+    </h1>
+    
+    <span class="title">Quant Acuity</span> - 
+    is a South Africa–focused business intelligence and data analytics firm
+    delivering structured, data-driven solutions that transform complex datasets into clear,
+    actionable insights. We specialise in data preparation, cleaning, exploratory analysis, and reporting,
+    enabling organisations to understand performance trends, identify opportunities, and make informed,
+    evidence-based decisions that enhance operational and strategic outcomes.
+
+    The firm is committed to maintaining exceptional standards of quality in every engagement, ensuring
+    that insights are not only accurate but also practically relevant to long-term business growth and
+    decision-making excellence.
+  </div>
+
+  <!-- Image aligned vertically middle with text (flex align-items: center) -->
+   <br/>
+  <img src="home-graph.jpg"
+       alt="Analytics trend chart with upward arrow and annotations"
+       width="500"
+       height="300">
+</div>
+
+<!-- SERVICES: vertical alignment fixed (image and text side by side, middle aligned) -->
+<div class="services" id="services">
+  <br/>
+  <img src="shapes.jpg"
+       alt="Abstract shapes representing data services"
+       >
+
+  <div class="services-content">
+    <h2>Our Services</h2>
+    Quant Acuity delivers structured analytical solutions designed to help organisations extract meaningful insights from their data.
+    <ul>
+      <li>Data Preparation & Cleaning</li>
+      <li>Exploratory Data Analysis (EDA)</li>
+      <li>Business Performance Reporting</li>
+      <li>Market & Trend Analysis</li>
+      <li>Data Interpretation & Insight Generation</li>
+    </ul>
+
+    Our approach prioritises accuracy, clarity, and actionable intelligence that supports informed decision-making and sustainable business performance.
+  </div>
+</div>
+
+<div class="contact-section" id="contact">
+  <div class="contact-container">
+    
+    <div class="contact-header">
+      <h2>Talk with us</h2>
+    </div>
+
+    <div class="contact-info-row">
+      <div class="contact-info-item">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value">076 093 0321</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">quantacuity@gmail.com</span>
+      </div>
+    </div>
+
+    <div class="contact-form-wrapper">
+      <div class="form-left">
+        <h3>Interested to work together? Let's talk</h3>
+        <p>We'll get back to you within 24 hours.</p>
+      </div>
+
+      <div class="contact-form">
+        <form id="emailForm">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="send-btn">Send</button>
+          <div id="formStatus" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Quant Acuity is an independent data analytics and business intelligence firm operating in South Africa. © 2026
+</footer>
+
+<script>
+  (function() {
+    "use strict";
+
+    // Rotating phrase logic (phase in/out with 2 second delay)
+    const phraseElement = document.getElementById('dynamicPhrase');
+    if (phraseElement) {
+      const phrases = [
+        "Quant Acuity",
+        "where data is action",
+        "where Information is made simple"
+      ];
+
+      let currentIndex = 0;
+      const DISPLAY_DURATION = 2000;
+      const FADE_DURATION = 800;
+
+      phraseElement.textContent = phrases[0];
+      phraseElement.style.opacity = '1';
+
+      function phaseToNextPhrase() {
+        phraseElement.style.opacity = '0';
+
+        setTimeout(() => {
+          currentIndex = (currentIndex + 1) % phrases.length;
+          phraseElement.textContent = phrases[currentIndex];
+          phraseElement.style.opacity = '1';
+        }, FADE_DURATION);
+      }
+
+      setTimeout(() => {
+        phaseToNextPhrase();
+        setInterval(() => {
+          phaseToNextPhrase();
+        }, DISPLAY_DURATION + FADE_DURATION);
+      }, DISPLAY_DURATION);
+    }
+
+    // Email form handler (sends to quantacuity@gmail.com via mailto)
+    const form = document.getElementById('emailForm');
+    const statusDiv = document.getElementById('formStatus');
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (!name || !email || !message) {
+          statusDiv.textContent = 'Please fill in all fields.';
+          statusDiv.className = 'form-status error-message';
+          return;
+        }
+        
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+          statusDiv.textContent = 'Please enter a valid email address.';
+          statusDiv.className = 'form-status error-message';
+          return;
+        }
+
+        statusDiv.textContent = 'Sending...';
+        statusDiv.className = 'form-status';
+        
+        const subject = `Quant Acuity Contact: ${name}`;
+        const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        
+        const mailtoLink = `mailto:quantacuity@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        window.location.href = mailtoLink;
+        
+        statusDiv.textContent = '✓ Your email client should open after a few seconds. If not, email us directly.';
+        statusDiv.className = 'form-status success-message';
+        
+        setTimeout(() => {
+          form.reset();
+        }, 500);
+      });
+    }
+
+    // Smooth scroll for navigation with header offset
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            const headerOffset = 100;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          } else if (targetId === 'home') {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
