@@ -371,6 +371,207 @@
       border-bottom-color: #0b2b4a;
     }
 
+    /* ---------- DATASET SECTION (NEW) ---------- */
+    .dataset-section {
+      padding: 60px 0 40px;
+      background: #f8faff;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.9s ease;
+      transform: translateX(-100%);
+      opacity: 0;
+      border-top: 1px solid #eef2f8;
+      border-bottom: 1px solid #eef2f8;
+    }
+
+    .dataset-section.slide-in-right {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .dataset-section.slide-out-left {
+      transform: translateX(-100px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .dataset-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .dataset-card {
+      background: #ffffff;
+      border: 1px solid #dce3ed;
+      border-radius: 16px;
+      padding: 40px 48px;
+      display: flex;
+      gap: 50px;
+      align-items: stretch;
+      box-shadow: 0 4px 24px rgba(11, 43, 74, 0.04);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .dataset-card:hover {
+      box-shadow: 0 8px 40px rgba(11, 43, 74, 0.08);
+    }
+
+    .dataset-image {
+      flex: 0 0 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #eef2f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      border: 1px solid #e6e9f0;
+    }
+
+    .dataset-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Fallback if no image */
+    .dataset-image .no-image {
+      color: #8a9bb0;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .dataset-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dataset-content h2 {
+      font-size: 26px;
+      font-weight: 500;
+      color: #0b1c2e;
+      letter-spacing: -0.2px;
+      margin-bottom: 6px;
+    }
+
+    .dataset-badge {
+      display: inline-block;
+      background: #eef4f8;
+      color: #0b2b4a;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      border: 1px solid #dce3ed;
+    }
+
+    .dataset-content .description {
+      font-size: 15px;
+      color: #4e5f78;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      max-width: 700px;
+    }
+
+    .dataset-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 40px;
+      margin: 12px 0 18px;
+      padding: 14px 0;
+      border-top: 1px solid #eef2f8;
+      border-bottom: 1px solid #eef2f8;
+    }
+
+    .dataset-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dataset-meta-item .label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #8a9bb0;
+    }
+
+    .dataset-meta-item .value {
+      font-size: 15px;
+      font-weight: 450;
+      color: #0b1c2e;
+      margin-top: 2px;
+    }
+
+    .dataset-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #0b2b4a;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      box-shadow: 0 2px 8px rgba(11, 43, 74, 0.15);
+    }
+
+    .download-btn:hover {
+      background: #1a3f60;
+      box-shadow: 0 4px 16px rgba(11, 43, 74, 0.2);
+    }
+
+    .download-btn:active {
+      transform: scale(0.97);
+    }
+
+    .download-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    .dataset-actions .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #0b2b4a;
+      border: 1px solid #dce3ed;
+      padding: 13px 28px;
+      font-size: 15px;
+      font-weight: 450;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .dataset-actions .secondary-btn:hover {
+      background: #f0f4fa;
+      border-color: #0b2b4a;
+    }
+
     /* ---------- contact section (warm/grey background) ---------- */
     .contact-section {
       padding: 60px 0 20px;
@@ -551,7 +752,7 @@
     }
 
     /* scroll margin */
-    #services, #contact {
+    #services, #contact, #dataset {
       scroll-margin-top: 90px;
     }
 
@@ -575,6 +776,28 @@
       }
       .services-grid {
         grid-template-columns: 1fr 1fr;
+      }
+      .dataset-container {
+        padding: 0 30px;
+      }
+      .dataset-card {
+        flex-direction: column;
+        padding: 30px 24px;
+        gap: 24px;
+      }
+      .dataset-image {
+        flex: 0 0 auto;
+        width: 100%;
+        min-height: 180px;
+        max-height: 240px;
+      }
+      .dataset-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .dataset-actions .download-btn,
+      .dataset-actions .secondary-btn {
+        justify-content: center;
       }
     }
 
@@ -614,6 +837,18 @@
       .contact-form-wrapper {
         flex-direction: column;
       }
+      .dataset-container {
+        padding: 0 18px;
+      }
+      .dataset-card {
+        padding: 24px 18px;
+      }
+      .dataset-content h2 {
+        font-size: 20px;
+      }
+      .dataset-meta {
+        gap: 12px 24px;
+      }
     }
   </style>
 </head>
@@ -630,6 +865,7 @@
   <nav>
     <a href="#home">Home</a>
     <a href="#services">Services</a>
+    <a href="#dataset">Dataset</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -724,6 +960,69 @@
   </div>
 </section>
 
+<!-- ========== DATASET DOWNLOAD SECTION (NEW) ========== -->
+<section class="dataset-section" id="dataset">
+  <div class="dataset-container">
+    <div class="dataset-card">
+      
+      <!-- Image placeholder - REPLACE src WITH YOUR IMAGE -->
+      <div class="dataset-image">
+        <img src="spreadsheets.jpg" alt="South African customer dataset visualization" />
+        <!-- If you don't have an image yet, uncomment below and comment out the img tag above -->
+        <!-- <div class="no-image">📊 Dataset preview<br><span style="font-size:12px;color:#b0c0d0;">(Add your image here)</span></div> -->
+      </div>
+
+      <div class="dataset-content">
+        <div>
+          <span class="dataset-badge">Free Dataset</span>
+          <h2>South African Customer Insights Dataset</h2>
+          <p class="description">
+            A comprehensive, anonymised customer dataset specifically curated for the 
+            <strong>South African market</strong>. This dataset includes demographic profiles, 
+            purchasing behaviour, regional distribution, and etc 
+            — ideal for analytics practice, model testing, 
+            and market research.
+          </p>
+          
+          <div class="dataset-meta">
+            <div class="dataset-meta-item">
+              <span class="label">Format</span>
+              <span class="value">CSV</span>
+            </div>
+            <div class="dataset-meta-item">
+              <span class="label">Records</span>
+              <span class="value">1000 rows</span>
+            </div>
+            <div class="dataset-meta-item">
+              <span class="label">File Size</span>
+              <span class="value">104 KB</span>
+            </div>
+            <div class="dataset-meta-item">
+              <span class="label">Variables</span>
+              <span class="value">14 columns</span>
+            </div>
+            <div class="dataset-meta-item">
+              <span class="label">Region</span>
+              <span class="value">🇿🇦 South Africa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dataset-actions">
+          <a href="https://drive.google.com/uc?export=download&id=1IBWB0dklSbroKiZWp_Q1zhmGNL9sgnMr&confirm=t" 
+             class="download-btn" 
+             download>
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z" transform="rotate(180,12,12)"/>
+            </svg>
+            Download Dataset
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== CONTACT ========== -->
 <section class="contact-section" id="contact">
   <div class="contact-container">
@@ -769,7 +1068,7 @@
 </section>
 
 <footer>
-  <span>Quant Acuity</span> — independent data science firm · South Africa · © 2026
+  <span>Quant Acuity</span> — independent data science firm &amp; · South Africa · © 2026
 </footer>
 
 <script>
@@ -809,6 +1108,7 @@
     // ----- scroll animations (bidirectional - sections slide in/out both ways) -----
     const heroSection = document.querySelector('.hero-section');
     const servicesSection = document.querySelector('.services-section');
+    const datasetSection = document.querySelector('.dataset-section');
     const contactSection = document.querySelector('.contact-section');
 
     function handleScroll() {
@@ -857,6 +1157,29 @@
         else {
           servicesSection.classList.remove('slide-in-left');
           servicesSection.classList.remove('slide-out-right');
+        }
+      }
+
+      // DATASET: slides in from right when visible, slides out right when scrolled past
+      if (datasetSection) {
+        const datasetRect = datasetSection.getBoundingClientRect();
+        const datasetBottom = datasetRect.bottom;
+        const datasetTop = datasetRect.top;
+        
+        // If dataset is visible in viewport
+        if (datasetTop < windowHeight - 50 && datasetBottom > 50) {
+          datasetSection.classList.remove('slide-out-left');
+          datasetSection.classList.add('slide-in-right');
+        } 
+        // If dataset is scrolled past (above viewport)
+        else if (datasetBottom < 0) {
+          datasetSection.classList.remove('slide-in-right');
+          datasetSection.classList.add('slide-out-left');
+        }
+        // If dataset is below viewport (scrolled up)
+        else {
+          datasetSection.classList.remove('slide-in-right');
+          datasetSection.classList.remove('slide-out-left');
         }
       }
 
