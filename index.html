@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quant Acuity · Intelligence in data</title>
   <style>
-    /* ---------- reset & base ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -371,7 +370,7 @@
       border-bottom-color: #0b2b4a;
     }
 
-    /* ---------- DATASET SECTION (NEW) ---------- */
+    /* ---------- DATASET SECTION (UPDATED: TWO TILES SIDE BY SIDE) ---------- */
     .dataset-section {
       padding: 60px 0 40px;
       background: #f8faff;
@@ -399,16 +398,23 @@
       padding: 0 60px;
     }
 
+    .dataset-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
     .dataset-card {
       background: #ffffff;
       border: 1px solid #dce3ed;
       border-radius: 16px;
-      padding: 40px 48px;
+      padding: 32px 32px 28px;
       display: flex;
-      gap: 50px;
-      align-items: stretch;
+      flex-direction: column;
+      gap: 16px;
       box-shadow: 0 4px 24px rgba(11, 43, 74, 0.04);
       transition: box-shadow 0.3s ease;
+      height: 100%;
     }
 
     .dataset-card:hover {
@@ -416,14 +422,15 @@
     }
 
     .dataset-image {
-      flex: 0 0 280px;
+      width: 100%;
       border-radius: 12px;
       overflow: hidden;
       background: #eef2f8;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 220px;
+      min-height: 180px;
+      max-height: 220px;
       border: 1px solid #e6e9f0;
     }
 
@@ -434,7 +441,6 @@
       display: block;
     }
 
-    /* Fallback if no image */
     .dataset-image .no-image {
       color: #8a9bb0;
       font-size: 14px;
@@ -451,11 +457,11 @@
     }
 
     .dataset-content h2 {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 500;
       color: #0b1c2e;
       letter-spacing: -0.2px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .dataset-badge {
@@ -468,24 +474,24 @@
       text-transform: uppercase;
       padding: 4px 14px;
       border-radius: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border: 1px solid #dce3ed;
+      align-self: flex-start;
     }
 
     .dataset-content .description {
-      font-size: 15px;
+      font-size: 14px;
       color: #4e5f78;
-      line-height: 1.7;
-      margin-bottom: 12px;
-      max-width: 700px;
+      line-height: 1.6;
+      margin-bottom: 8px;
     }
 
     .dataset-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px 40px;
-      margin: 12px 0 18px;
-      padding: 14px 0;
+      gap: 12px 24px;
+      margin: 8px 0 16px;
+      padding: 12px 0;
       border-top: 1px solid #eef2f8;
       border-bottom: 1px solid #eef2f8;
     }
@@ -496,7 +502,7 @@
     }
 
     .dataset-meta-item .label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.4px;
@@ -504,7 +510,7 @@
     }
 
     .dataset-meta-item .value {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 450;
       color: #0b1c2e;
       margin-top: 2px;
@@ -512,9 +518,9 @@
 
     .dataset-actions {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .download-btn {
@@ -524,8 +530,8 @@
       background: #0b2b4a;
       color: white;
       border: none;
-      padding: 14px 32px;
-      font-size: 15px;
+      padding: 12px 24px;
+      font-size: 14px;
       font-weight: 500;
       border-radius: 40px;
       cursor: pointer;
@@ -545,8 +551,8 @@
     }
 
     .download-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       flex-shrink: 0;
       fill: currentColor;
     }
@@ -558,8 +564,8 @@
       background: transparent;
       color: #0b2b4a;
       border: 1px solid #dce3ed;
-      padding: 13px 28px;
-      font-size: 15px;
+      padding: 11px 24px;
+      font-size: 14px;
       font-weight: 450;
       border-radius: 40px;
       cursor: pointer;
@@ -780,16 +786,16 @@
       .dataset-container {
         padding: 0 30px;
       }
-      .dataset-card {
-        flex-direction: column;
-        padding: 30px 24px;
+      .dataset-grid {
+        grid-template-columns: 1fr;
         gap: 24px;
       }
+      .dataset-card {
+        padding: 24px 20px;
+      }
       .dataset-image {
-        flex: 0 0 auto;
-        width: 100%;
-        min-height: 180px;
-        max-height: 240px;
+        min-height: 150px;
+        max-height: 200px;
       }
       .dataset-actions {
         flex-direction: column;
@@ -841,13 +847,13 @@
         padding: 0 18px;
       }
       .dataset-card {
-        padding: 24px 18px;
+        padding: 20px 16px;
       }
       .dataset-content h2 {
         font-size: 20px;
       }
       .dataset-meta {
-        gap: 12px 24px;
+        gap: 10px 16px;
       }
     }
   </style>
@@ -960,66 +966,110 @@
   </div>
 </section>
 
-<!-- ========== DATASET DOWNLOAD SECTION (NEW) ========== -->
+<!-- ========== DATASET SECTION (TWO TILES) ========== -->
 <section class="dataset-section" id="dataset">
   <div class="dataset-container">
-    <div class="dataset-card">
+    <div class="dataset-grid">
       
-      <!-- Image placeholder - REPLACE src WITH YOUR IMAGE -->
-      <div class="dataset-image">
-        <img src="spreadsheets.jpg" alt="South African customer dataset visualization" />
-        <!-- If you don't have an image yet, uncomment below and comment out the img tag above -->
-        <!-- <div class="no-image">📊 Dataset preview<br><span style="font-size:12px;color:#b0c0d0;">(Add your image here)</span></div> -->
-      </div>
-
-      <div class="dataset-content">
-        <div>
-          <span class="dataset-badge">Free Dataset</span>
-          <h2>South African Customer Insights Dataset</h2>
-          <p class="description">
-            A comprehensive, anonymised customer dataset specifically curated for the 
-            <strong>South African market</strong>. This dataset includes demographic profiles, 
-            purchasing behaviour, regional distribution, and etc 
-            — ideal for analytics practice, model testing, 
-            and market research.
-          </p>
-          
-          <div class="dataset-meta">
-            <div class="dataset-meta-item">
-              <span class="label">Format</span>
-              <span class="value">CSV</span>
-            </div>
-            <div class="dataset-meta-item">
-              <span class="label">Records</span>
-              <span class="value">1000 rows</span>
-            </div>
-            <div class="dataset-meta-item">
-              <span class="label">File Size</span>
-              <span class="value">104 KB</span>
-            </div>
-            <div class="dataset-meta-item">
-              <span class="label">Variables</span>
-              <span class="value">14 columns</span>
-            </div>
-            <div class="dataset-meta-item">
-              <span class="label">Region</span>
-              <span class="value">🇿🇦 South Africa</span>
+      <!-- Tile 1: South African Customer Insights Dataset -->
+      <div class="dataset-card">
+        <div class="dataset-image">
+          <img src="spreadsheets.jpg" alt="South African customer dataset visualization" />
+        </div>
+        <div class="dataset-content">
+          <div>
+            <span class="dataset-badge">Free Dataset</span>
+            <h2>South African Customer Insights</h2>
+            <p class="description">
+              Anonymised customer dataset for the <strong>South African market</strong> with demographics, 
+              purchasing behaviour, and regional distribution — ideal for analytics practice and market research.
+            </p>
+            <div class="dataset-meta">
+              <div class="dataset-meta-item">
+                <span class="label">Format</span>
+                <span class="value">CSV</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">Records</span>
+                <span class="value">1000 rows</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">File Size</span>
+                <span class="value">104 KB</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">Variables</span>
+                <span class="value">14 columns</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">Region</span>
+                <span class="value">🇿🇦 South Africa</span>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="dataset-actions">
-          <!-- REPLACE href WITH YOUR ACTUAL DOWNLOAD URL -->
-          <a href="https://drive.google.com/uc?export=download&id=1IBWB0dklSbroKiZWp_Q1zhmGNL9sgnMr&confirm=t" 
-             class="download-btn" 
-             download>
-            <svg viewBox="0 0 24 24" width="20" height="20">
-              <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z" transform="rotate(180,12,12)"/>
-            </svg>
-            Download Dataset
-          </a>
+          <div class="dataset-actions">
+            <a href="https://drive.google.com/uc?export=download&id=1IBWB0dklSbroKiZWp_Q1zhmGNL9sgnMr&confirm=t" 
+               class="download-btn" 
+               download>
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z" transform="rotate(180,12,12)"/>
+              </svg>
+              Download Dataset
+            </a>
+          </div>
         </div>
       </div>
+
+      <!-- Tile 2: South African Loan Dataset (NEW) -->
+      <div class="dataset-card">
+        <div class="dataset-image">
+          <img src="spreadsheets.jpg" alt="South African loan dataset visualization" />
+        </div>
+        <div class="dataset-content">
+          <div>
+            <span class="dataset-badge">Free Dataset</span>
+            <h2>South African Loan Dataset</h2>
+            <p class="description">
+              Comprehensive loan data from the <strong>South African market</strong> including borrower profiles, 
+              employment status, credit scores, and loan performance — perfect for credit risk modelling and 
+              financial analytics.
+            </p>
+            <div class="dataset-meta">
+              <div class="dataset-meta-item">
+                <span class="label">Format</span>
+                <span class="value">CSV</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">Records</span>
+                <span class="value">~100 rows</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">File Size</span>
+                <span class="value">~15 KB</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">Variables</span>
+                <span class="value">13 columns</span>
+              </div>
+              <div class="dataset-meta-item">
+                <span class="label">Region</span>
+                <span class="value">🇿🇦 South Africa</span>
+              </div>
+            </div>
+          </div>
+          <div class="dataset-actions">
+            <a href="https://drive.google.com/uc?export=download&id=18Cjl2gDklFHKB3Ag7O1LZlKVMd23Fd5f&confirm=t" 
+               class="download-btn" 
+               download>
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h3.66V9h3.84L12 2z" transform="rotate(180,12,12)"/>
+              </svg>
+              Download Dataset
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1069,7 +1119,7 @@
 </section>
 
 <footer>
-  <span>Quant Acuity</span> — independent data science firm &amp; · South Africa · © 2026
+  <span>Quant Acuity</span> — independent data science firm · South Africa · © 2026
 </footer>
 
 <script>
@@ -1161,7 +1211,7 @@
         }
       }
 
-      // DATASET: slides in from right when visible, slides out right when scrolled past
+      // DATASET: slides in from right when visible, slides out left when scrolled past
       if (datasetSection) {
         const datasetRect = datasetSection.getBoundingClientRect();
         const datasetBottom = datasetRect.bottom;
@@ -1195,12 +1245,12 @@
           contactSection.classList.remove('slide-out-left');
           contactSection.classList.add('slide-in-right');
         } 
-        // If contact is scrolled past (above viewport)
+        
         else if (contactBottom < 0) {
           contactSection.classList.remove('slide-in-right');
           contactSection.classList.add('slide-out-left');
         }
-        // If contact is below viewport (scrolled up)
+ 
         else {
           contactSection.classList.remove('slide-in-right');
           contactSection.classList.remove('slide-out-left');
@@ -1208,7 +1258,7 @@
       }
     }
 
-    // Throttled scroll listener
+  
     let ticking = false;
     window.addEventListener('scroll', function() {
       if (!ticking) {
@@ -1220,10 +1270,10 @@
       }
     });
 
-    // Initial check
+
     setTimeout(handleScroll, 100);
 
-    // ----- contact form (mailto) -----
+
     const form = document.getElementById('emailForm');
     const statusDiv = document.getElementById('formStatus');
 
@@ -1262,7 +1312,7 @@
       });
     }
 
-    // ----- smooth nav scroll -----
+
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -1281,7 +1331,7 @@
       });
     });
 
-    // header shadow on scroll
+
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 10);
