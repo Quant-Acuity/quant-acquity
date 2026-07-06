@@ -359,7 +359,7 @@
       border-bottom-color: #0b2b4a;
     }
 
-    /* ---------- DATASET SECTION (UPDATED: CAROUSEL WITH ARROWS) ---------- */
+    /* ---------- DATASET SECTION (CAROUSEL WITH PROPER ARROWS) ---------- */
     .dataset-section {
       padding: 60px 0 40px;
       background: #f8faff;
@@ -575,7 +575,7 @@
       border-color: #0b2b4a;
     }
 
-    /* ---------- Carousel Navigation Arrows ---------- */
+    /* ---------- Carousel Navigation Arrows - FIXED (no clipping) ---------- */
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -590,7 +590,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 10;
+      z-index: 20;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       color: #0b2b4a;
@@ -618,12 +618,13 @@
       display: block;
     }
 
+    /* Position arrows OUTSIDE the carousel wrapper so they don't get clipped */
     .carousel-btn-prev {
-      left: -24px;
+      left: -28px;
     }
 
     .carousel-btn-next {
-      right: -24px;
+      right: -28px;
     }
 
     /* Carousel dots/indicators */
@@ -881,6 +882,7 @@
       .dataset-actions .secondary-btn {
         justify-content: center;
       }
+      /* Arrows move inside on smaller screens */
       .carousel-btn-prev {
         left: 8px;
       }
@@ -888,12 +890,12 @@
         right: 8px;
       }
       .carousel-btn {
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
       }
       .carousel-btn svg {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
       }
     }
 
@@ -946,8 +948,8 @@
         gap: 12px 24px;
       }
       .carousel-btn {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
       }
       .carousel-btn svg {
         width: 18px;
@@ -1069,9 +1071,10 @@
   </div>
 </section>
 
-<!-- ========== DATASET SECTION (CAROUSEL WITH ARROWS) ========== -->
+<!-- ========== DATASET SECTION (CAROUSEL WITH PROPER ARROWS) ========== -->
 <section class="dataset-section" id="dataset">
   <div class="dataset-container">
+    <!-- Carousel wrapper with overflow hidden -->
     <div class="dataset-carousel-wrapper">
       <div class="dataset-carousel-track" id="datasetTrack">
         
@@ -1129,7 +1132,7 @@
           </div>
         </div>
 
-        <!-- Dataset 2: South African Loan Dataset (NEW) -->
+        <!-- Dataset 2: South African Loan Dataset -->
         <div class="dataset-card">
           <div class="dataset-image">
             <img src="spreadsheets.jpg" alt="South African loan dataset visualization" />
@@ -1183,7 +1186,7 @@
 
       </div> <!-- end carousel-track -->
 
-      <!-- Navigation Arrows -->
+      <!-- Navigation Arrows - positioned outside the overflow:hidden wrapper -->
       <button class="carousel-btn carousel-btn-prev" id="prevBtn" aria-label="Previous dataset">
         <svg viewBox="0 0 24 24">
           <polyline points="15 18 9 12 15 6"></polyline>
@@ -1296,15 +1299,12 @@
     const totalCards = cards.length;
 
     function updateCarousel(index) {
-      // Ensure index is within bounds
       if (index < 0) index = 0;
       if (index >= totalCards) index = totalCards - 1;
       currentIndex = index;
 
-      // Update track position
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
       
-      // Update dots
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === currentIndex);
       });
@@ -1314,7 +1314,6 @@
       if (currentIndex < totalCards - 1) {
         updateCarousel(currentIndex + 1);
       } else {
-        // Optionally loop to first
         updateCarousel(0);
       }
     }
@@ -1323,16 +1322,13 @@
       if (currentIndex > 0) {
         updateCarousel(currentIndex - 1);
       } else {
-        // Optionally loop to last
         updateCarousel(totalCards - 1);
       }
     }
 
-    // Event listeners for arrows
     nextBtn.addEventListener('click', goToNext);
     prevBtn.addEventListener('click', goToPrev);
 
-    // Event listeners for dots
     dots.forEach((dot) => {
       dot.addEventListener('click', function() {
         const index = parseInt(this.getAttribute('data-index'), 10);
@@ -1342,7 +1338,6 @@
       });
     });
 
-    // Optional: Keyboard navigation (left/right arrows)
     document.addEventListener('keydown', function(e) {
       if (e.key === 'ArrowRight') {
         goToNext();
@@ -1353,10 +1348,9 @@
       }
     });
 
-    // Initialize carousel
     updateCarousel(0);
 
-    // ----- scroll animations (bidirectional - sections slide in/out both ways) -----
+    // ----- scroll animations -----
     const heroSection = document.querySelector('.hero-section');
     const servicesSection = document.querySelector('.services-section');
     const datasetSection = document.querySelector('.dataset-section');
@@ -1365,100 +1359,75 @@
     function handleScroll() {
       const windowHeight = window.innerHeight;
 
-      // HERO: slides out left when scrolled past, slides back in when returning
       if (heroSection) {
         const heroRect = heroSection.getBoundingClientRect();
         const heroBottom = heroRect.bottom;
         const heroTop = heroRect.top;
         
-        // If hero is completely above viewport (scrolled past)
         if (heroBottom < 0) {
           heroSection.classList.add('slide-out-left');
           heroSection.classList.remove('slide-in-right');
-        } 
-        // If hero is visible in viewport
-        else if (heroTop < windowHeight && heroBottom > 0) {
+        } else if (heroTop < windowHeight && heroBottom > 0) {
           heroSection.classList.remove('slide-out-left');
           heroSection.classList.add('slide-in-right');
-        }
-        // If hero is below viewport (scrolled up past it)
-        else {
+        } else {
           heroSection.classList.remove('slide-out-left');
           heroSection.classList.remove('slide-in-right');
         }
       }
 
-      // SERVICES: slides in from right when visible, slides out right when scrolled past
       if (servicesSection) {
         const servicesRect = servicesSection.getBoundingClientRect();
         const servicesBottom = servicesRect.bottom;
         const servicesTop = servicesRect.top;
         
-        // If services is visible in viewport
         if (servicesTop < windowHeight - 50 && servicesBottom > 50) {
           servicesSection.classList.remove('slide-out-right');
           servicesSection.classList.add('slide-in-left');
-        } 
-        // If services is scrolled past (above viewport)
-        else if (servicesBottom < 0) {
+        } else if (servicesBottom < 0) {
           servicesSection.classList.remove('slide-in-left');
           servicesSection.classList.add('slide-out-right');
-        }
-        // If services is below viewport (scrolled up)
-        else {
+        } else {
           servicesSection.classList.remove('slide-in-left');
           servicesSection.classList.remove('slide-out-right');
         }
       }
 
-      // DATASET: slides in from right when visible, slides out left when scrolled past
       if (datasetSection) {
         const datasetRect = datasetSection.getBoundingClientRect();
         const datasetBottom = datasetRect.bottom;
         const datasetTop = datasetRect.top;
         
-        // If dataset is visible in viewport
         if (datasetTop < windowHeight - 50 && datasetBottom > 50) {
           datasetSection.classList.remove('slide-out-left');
           datasetSection.classList.add('slide-in-right');
-        } 
-        // If dataset is scrolled past (above viewport)
-        else if (datasetBottom < 0) {
+        } else if (datasetBottom < 0) {
           datasetSection.classList.remove('slide-in-right');
           datasetSection.classList.add('slide-out-left');
-        }
-        // If dataset is below viewport (scrolled up)
-        else {
+        } else {
           datasetSection.classList.remove('slide-in-right');
           datasetSection.classList.remove('slide-out-left');
         }
       }
 
-      // CONTACT: slides in from left when visible, slides out left when scrolled past
       if (contactSection) {
         const contactRect = contactSection.getBoundingClientRect();
         const contactBottom = contactRect.bottom;
         const contactTop = contactRect.top;
         
-        // If contact is visible in viewport
         if (contactTop < windowHeight - 50 && contactBottom > 50) {
           contactSection.classList.remove('slide-out-left');
           contactSection.classList.add('slide-in-right');
-        } 
-        // If contact is scrolled past (above viewport)
-        else if (contactBottom < 0) {
+        } else if (contactBottom < 0) {
           contactSection.classList.remove('slide-in-right');
           contactSection.classList.add('slide-out-left');
-        }
-        // If contact is below viewport (scrolled up)
-        else {
+        } else {
           contactSection.classList.remove('slide-in-right');
           contactSection.classList.remove('slide-out-left');
         }
       }
     }
 
-    // Throttled scroll listener
     let ticking = false;
     window.addEventListener('scroll', function() {
       if (!ticking) {
@@ -1470,7 +1439,6 @@
       }
     });
 
-    // Initial check
     setTimeout(handleScroll, 100);
 
     // ----- contact form (mailto) -----
