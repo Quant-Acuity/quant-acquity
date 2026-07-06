@@ -580,7 +580,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(6px);
       border: 1px solid #dce3ed;
       border-radius: 50%;
@@ -592,28 +592,30 @@
       cursor: pointer;
       z-index: 10;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       color: #0b2b4a;
     }
 
     .carousel-btn:hover {
       background: #ffffff;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
       border-color: #0b2b4a;
+      transform: translateY(-50%) scale(1.04);
     }
 
     .carousel-btn:active {
-      transform: translateY(-50%) scale(0.95);
+      transform: translateY(-50%) scale(0.94);
     }
 
     .carousel-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 2.5;
+      stroke-width: 2.8;
       stroke-linecap: round;
       stroke-linejoin: round;
+      display: block;
     }
 
     .carousel-btn-prev {
@@ -886,12 +888,12 @@
         right: 8px;
       }
       .carousel-btn {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
       }
       .carousel-btn svg {
-        width: 18px;
-        height: 18px;
+        width: 22px;
+        height: 22px;
       }
     }
 
@@ -944,12 +946,12 @@
         gap: 12px 24px;
       }
       .carousel-btn {
-        width: 34px;
-        height: 34px;
+        width: 38px;
+        height: 38px;
       }
       .carousel-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
       }
       .carousel-btn-prev {
         left: 4px;
@@ -1284,7 +1286,7 @@
       }, DISPLAY);
     }
 
-    // ----- DATASET CAROUSEL LOGIC -----
+    // ----- DATASET CAROUSEL LOGIC (PROPER ARROWS) -----
     const track = document.getElementById('datasetTrack');
     const cards = track.querySelectorAll('.dataset-card');
     const prevBtn = document.getElementById('prevBtn');
@@ -1294,27 +1296,36 @@
     const totalCards = cards.length;
 
     function updateCarousel(index) {
+      // Ensure index is within bounds
+      if (index < 0) index = 0;
+      if (index >= totalCards) index = totalCards - 1;
+      currentIndex = index;
+
       // Update track position
-      track.style.transform = `translateX(-${index * 100}%)`;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
       
       // Update dots
       dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
+        dot.classList.toggle('active', i === currentIndex);
       });
-
-      // Update button visibility (optional: hide if at ends)
-      // prevBtn.style.visibility = index === 0 ? 'hidden' : 'visible';
-      // nextBtn.style.visibility = index === totalCards - 1 ? 'hidden' : 'visible';
     }
 
     function goToNext() {
-      currentIndex = (currentIndex + 1) % totalCards;
-      updateCarousel(currentIndex);
+      if (currentIndex < totalCards - 1) {
+        updateCarousel(currentIndex + 1);
+      } else {
+        // Optionally loop to first
+        updateCarousel(0);
+      }
     }
 
     function goToPrev() {
-      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-      updateCarousel(currentIndex);
+      if (currentIndex > 0) {
+        updateCarousel(currentIndex - 1);
+      } else {
+        // Optionally loop to last
+        updateCarousel(totalCards - 1);
+      }
     }
 
     // Event listeners for arrows
@@ -1326,8 +1337,7 @@
       dot.addEventListener('click', function() {
         const index = parseInt(this.getAttribute('data-index'), 10);
         if (!isNaN(index) && index !== currentIndex) {
-          currentIndex = index;
-          updateCarousel(currentIndex);
+          updateCarousel(index);
         }
       });
     });
