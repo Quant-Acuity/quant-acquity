@@ -359,7 +359,7 @@
       border-bottom-color: #0b2b4a;
     }
 
-    /* ---------- DATASET SECTION (CAROUSEL WITH PROPER ARROWS) ---------- */
+    /* ---------- DATASET SECTION ---------- */
     .dataset-section {
       padding: 60px 0 40px;
       background: #f8faff;
@@ -368,6 +368,7 @@
       opacity: 0;
       border-top: 1px solid #eef2f8;
       border-bottom: 1px solid #eef2f8;
+      overflow: visible;
     }
 
     .dataset-section.slide-in-right {
@@ -386,6 +387,7 @@
       margin: 0 auto;
       padding: 0 60px;
       position: relative;
+      overflow: visible;
     }
 
     .dataset-carousel-wrapper {
@@ -575,7 +577,7 @@
       border-color: #0b2b4a;
     }
 
-    /* ---------- Carousel Navigation Arrows - FIXED (no clipping) ---------- */
+    /* ---------- Carousel Navigation Arrows - MOVED INWARD ---------- */
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -590,17 +592,18 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 20;
+      z-index: 30;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
       color: #0b2b4a;
+      flex-shrink: 0;
     }
 
     .carousel-btn:hover {
       background: #ffffff;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
       border-color: #0b2b4a;
-      transform: translateY(-50%) scale(1.04);
+      transform: translateY(-50%) scale(1.05);
     }
 
     .carousel-btn:active {
@@ -618,13 +621,13 @@
       display: block;
     }
 
-    /* Position arrows OUTSIDE the carousel wrapper so they don't get clipped */
+    /* Arrows moved INWARD - positioned over the card edges */
     .carousel-btn-prev {
-      left: -28px;
+      left: 12px;
     }
 
     .carousel-btn-next {
-      right: -28px;
+      right: 12px;
     }
 
     /* Carousel dots/indicators */
@@ -882,20 +885,19 @@
       .dataset-actions .secondary-btn {
         justify-content: center;
       }
-      /* Arrows move inside on smaller screens */
-      .carousel-btn-prev {
-        left: 8px;
-      }
-      .carousel-btn-next {
-        right: 8px;
-      }
       .carousel-btn {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
       }
       .carousel-btn svg {
         width: 20px;
         height: 20px;
+      }
+      .carousel-btn-prev {
+        left: 10px;
+      }
+      .carousel-btn-next {
+        right: 10px;
       }
     }
 
@@ -956,10 +958,10 @@
         height: 18px;
       }
       .carousel-btn-prev {
-        left: 4px;
+        left: 6px;
       }
       .carousel-btn-next {
-        right: 4px;
+        right: 6px;
       }
     }
   </style>
@@ -1019,7 +1021,6 @@
       <a href="#contact" class="sub-link">Talk to us →</a>
     </div>
     <div class="services-grid">
-      <!-- Service 1 -->
       <div class="service-card">
         <div class="service-img-placeholder">
           <img src="computers.jpg" alt="Data preparation icon" />
@@ -1028,41 +1029,33 @@
         <p>Raw data transformed into reliable, analysis‑ready datasets with rigorous quality checks.</p>
       </div>
 
-      <!-- Service 2 -->
       <div class="service-card">
         <div class="service-img-placeholder">
-          <img src="data-analysis.jpg"
-               alt="Exploratory analysis icon" />
+          <img src="data-analysis.jpg" alt="Exploratory analysis icon" />
         </div>
         <h3>Exploratory Data Analysis</h3>
         <p>Uncover hidden patterns, correlations, and outliers that drive strategic decision‑making.</p>
       </div>
 
-      <!-- Service 3 -->
       <div class="service-card">
         <div class="service-img-placeholder">
-          <img src="looking.jpg"
-               alt="Performance reporting icon" />
+          <img src="looking.jpg" alt="Performance reporting icon" />
         </div>
         <h3>Business Performance Reporting</h3>
         <p>Custom dashboards and reports that translate KPIs into actionable business intelligence.</p>
       </div>
 
-      <!-- Service 4 -->
       <div class="service-card">
         <div class="service-img-placeholder">
-          <img src="market.jpg"
-               alt="Market analysis icon" />
+          <img src="market.jpg" alt="Market analysis icon" />
         </div>
         <h3>Market &amp; Trend Analysis</h3>
         <p>South Africa‑focused market intelligence to identify opportunities and mitigate risk.</p>
       </div>
 
-      <!-- Service 5 -->
       <div class="service-card">
         <div class="service-img-placeholder">
-          <img src="explaining.jpg"
-               alt="Insight generation icon" />
+          <img src="explaining.jpg" alt="Insight generation icon" />
         </div>
         <h3>Data Interpretation &amp; Insight Generation</h3>
         <p>Translate complex data into clear narratives that empower confident, evidence‑based decisions.</p>
@@ -1071,14 +1064,13 @@
   </div>
 </section>
 
-<!-- ========== DATASET SECTION (CAROUSEL WITH PROPER ARROWS) ========== -->
+<!-- ========== DATASET SECTION (ARROWS MOVED INWARD) ========== -->
 <section class="dataset-section" id="dataset">
   <div class="dataset-container">
-    <!-- Carousel wrapper with overflow hidden -->
     <div class="dataset-carousel-wrapper">
       <div class="dataset-carousel-track" id="datasetTrack">
         
-        <!-- Dataset 1: South African Customer Insights -->
+        <!-- Dataset 1 -->
         <div class="dataset-card">
           <div class="dataset-image">
             <img src="spreadsheets.jpg" alt="South African customer dataset visualization" />
@@ -1102,15 +1094,15 @@
                 </div>
                 <div class="dataset-meta-item">
                   <span class="label">Records</span>
-                  <span class="value">3000 rows</span>
+                  <span class="value">1000 rows</span>
                 </div>
                 <div class="dataset-meta-item">
                   <span class="label">File Size</span>
-                  <span class="value">312 KB</span>
+                  <span class="value">104 KB</span>
                 </div>
                 <div class="dataset-meta-item">
                   <span class="label">Variables</span>
-                  <span class="value">14 columns</span>
+                  <span class="value">13 columns</span>
                 </div>
                 <div class="dataset-meta-item">
                   <span class="label">Region</span>
@@ -1132,7 +1124,7 @@
           </div>
         </div>
 
-        <!-- Dataset 2: South African Loan Dataset -->
+        <!-- Dataset 2 -->
         <div class="dataset-card">
           <div class="dataset-image">
             <img src="spreadsheets.jpg" alt="South African loan dataset visualization" />
@@ -1186,7 +1178,7 @@
 
       </div> <!-- end carousel-track -->
 
-      <!-- Navigation Arrows - positioned outside the overflow:hidden wrapper -->
+      <!-- Navigation Arrows - positioned INWARD over the card edges -->
       <button class="carousel-btn carousel-btn-prev" id="prevBtn" aria-label="Previous dataset">
         <svg viewBox="0 0 24 24">
           <polyline points="15 18 9 12 15 6"></polyline>
@@ -1289,7 +1281,7 @@
       }, DISPLAY);
     }
 
-    // ----- DATASET CAROUSEL LOGIC (PROPER ARROWS) -----
+    // ----- DATASET CAROUSEL LOGIC -----
     const track = document.getElementById('datasetTrack');
     const cards = track.querySelectorAll('.dataset-card');
     const prevBtn = document.getElementById('prevBtn');
