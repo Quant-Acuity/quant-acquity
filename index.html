@@ -16,7 +16,7 @@
       font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
       background-color: #ffffff;
       color: #1a1e2b;
-      padding-top: 74px;
+      padding-top: var(--header-h);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -27,139 +27,66 @@
     }
 
     /* ---------- fixed header ---------- */
+    :root {
+      --header-h: 84px;
+    }
+
     header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(8px);
-      padding: 10px 40px; /* Slightly adjusted padding */
+      height: var(--header-h);
+      background: #ffffff; /* solid, so page content never shows through */
+      padding: 0 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
-      transition: box-shadow 0.2s, background 0.3s;
+      border-bottom: 1px solid #e6e9f0;
+      box-shadow: 0 2px 14px rgba(11, 28, 46, 0.06);
+      transition: box-shadow 0.25s ease;
     }
 
     header.scrolled {
-      box-shadow: 0 4px 20px rgba(0, 20, 40, 0.08);
-      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 6px 24px rgba(11, 28, 46, 0.14);
     }
 
     .logo-block {
       display: flex;
       align-items: center;
-      gap: 14px;
-    }
-
-    .logo-placeholder {
-      width: 84px;
-      height: 84px;
-      border-radius: 0px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
       flex-shrink: 0;
+      text-decoration: none;
     }
 
-    .logo-placeholder img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    /* Logo image: transparent PNG, same look as the supplied logo */
+    .logo-block img {
       display: block;
-    }
-
-    .logo-text {
-      font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      font-size: 16px; 
-      font-weight: 400; 
-      color: #000000; 
-      letter-spacing: 5px; 
-      white-space: nowrap; 
-      display: flex;
-      align-items: center;
-      margin-right: -5px; /* Fixes the trailing letter-spacing issue */
-    }
-
-    /* Forces the space between the words to be visible */
-    .logo-text .spacer {
-      display: inline-block;
-      width: 15px; /* Adjust this number to make the gap larger or smaller */
-    }
-
-    .line-start {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-
-    .line-end {
-      position: relative;
-    }
-
-    /* The connecting line */
-    .line-start::after {
-      content: '';
-      position: absolute;
-      bottom: -8px; /* Distance from text to line */
-      left: 0; 
-      /* This perfectly spans from the start of T to the end of A, 
-         including the space we created */
-      width: calc(100% + 15px + 1em); 
-      height: 1px;
-      background-color: #000000;
-    }
-
-    /* This draws the line exactly under the text 
-    .logo-text::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      height: 1px; 
-      background-color: #000000;
-      left: 4.5em;  
-      right: 5.2em; 
-    }*/
-
-    .logo-text .quant {
-      letter-spacing: 8px; /* Wide spacing between Q-U-A-N-T */
-      margin-right: 10px; /* Adds a bit of space between the two words */
-    }
-
-
-    .logo-text .acuity::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0; 
-      right: 0; 
-      height: 1px; 
-      background-color: #000000;
+      height: 30px;
+      width: auto;
     }
 
     nav {
       display: flex;
-      gap: 32px;
+      gap: 36px;
       align-items: center;
     }
 
     nav a {
       text-decoration: none;
       color: #1a1e2b;
-      font-size: 14px;
-      font-weight: 450;
-      letter-spacing: 0.2px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
       transition: color 0.2s;
       position: relative;
+      padding: 6px 0;
     }
 
     nav a::after {
       content: '';
       position: absolute;
-      bottom: -4px;
+      bottom: 0;
       left: 0;
       width: 0;
       height: 2px;
@@ -1044,13 +971,16 @@
 
     /* scroll margin */
     #services, #contact, #dataset, #models {
-      scroll-margin-top: 90px;
+      scroll-margin-top: var(--header-h);
     }
 
     /* ---------- responsive ---------- */
     @media (max-width: 1000px) {
       header {
-        padding: 12px 30px;
+        padding: 0 30px;
+      }
+      nav {
+        gap: 26px;
       }
       .hero-container {
         padding: 60px 30px;
@@ -1125,18 +1055,25 @@
     }
 
     @media (max-width: 700px) {
-      body {
-        padding-top: 68px;
+      :root {
+        --header-h: 92px;
       }
+      /* two tidy rows on phones: logo on top, menu underneath */
       header {
-        padding: 10px 18px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 16px;
+      }
+      .logo-block img {
+        height: 22px;
       }
       nav {
-        gap: 16px;
+        gap: 22px;
       }
       nav a {
-        font-size: 13px;
+        font-size: 14px;
+        padding: 4px 0;
       }
       .hero-container {
         padding: 40px 18px;
@@ -1202,12 +1139,9 @@
 
 <!-- ========== FIXED HEADER ========== -->
 <header>
-  <div class="logo-block">
-    <div class="logo-text" aria-label="Quant Acuity logo">
-      QUAN<span class="line-start">T</span><span class="spacer"> </span><span class="line-end">A</span>CUITY
-    </div>
-  </div>
-  </div>
+  <a class="logo-block" href="#home" aria-label="Quant Acuity home">
+    <img src="logo.png" alt="Quant Acuity" />
+  </a>
   <nav>
     <a href="#home">Home</a>
     <a href="#dataset">Datasets</a>
@@ -1649,6 +1583,8 @@
   (function() {
     "use strict";
 
+    const header = document.querySelector('header');
+
     // ----- rotating phrase (fade) -----
     const phraseEl = document.getElementById('dynamicPhrase');
     if (phraseEl) {
@@ -1897,7 +1833,7 @@
           const targetId = href.substring(1);
           const target = document.getElementById(targetId);
           if (target) {
-            const offset = 90;
+            const offset = header.offsetHeight;
             const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top: pos, behavior: 'smooth' });
           } else if (targetId === 'home') {
@@ -1908,7 +1844,6 @@
     });
 
     // header shadow on scroll
-    const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 10);
     });
