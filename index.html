@@ -75,30 +75,46 @@
 
     .logo-text {
       font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      font-size: 16px; /* Reduced from 26px to 16px (adjust this to your liking) */
+      font-size: 16px; 
       font-weight: 400; 
       color: #000000; 
-      letter-spacing: 5px; /* Reduced from 8px */
+      letter-spacing: 5px; 
       white-space: nowrap; 
-      
-      position: relative;
-      display: inline-block;
-      padding-bottom: 6px; /* Reduced from 10px to bring the line closer */
-      
-      /* Make sure this matches your new letter-spacing exactly */
-      margin-right: -5px; 
+      display: flex;
+      align-items: center;
     }
 
-    /* This draws the line exactly under the text */
+    .line-start {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .line-end {
+      position: relative;
+    }
+
+    /* This draws the line between them */
+    .line-start::after {
+      content: '';
+      position: absolute;
+      bottom: -6px; /* Pushes the line down below the text */
+      left: 0; 
+      width: calc(100% + 1em); /* Stretches across the T, the space, and the A */
+      height: 1px;
+      background-color: #000000;
+    }
+
+    /* This draws the line exactly under the text 
     .logo-text::after {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 0;
-      right: 60%; 
       height: 1px; 
       background-color: #000000;
-    }
+      left: 4.5em;  
+      right: 5.2em; 
+    }*/
 
     .logo-text .quant {
       letter-spacing: 8px; /* Wide spacing between Q-U-A-N-T */
@@ -1180,7 +1196,7 @@
 <header>
   <div class="logo-block">
     <div class="logo-text" aria-label="Quant Acuity logo">
-      QUANT ACUITY
+      QUAN<span class="line-start">T</span> <span class="line-end">A</span>CUITY
     </div>
   </div>
   </div>
