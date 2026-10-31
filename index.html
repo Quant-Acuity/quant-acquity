@@ -75,24 +75,35 @@
 
     .logo-text {
       font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      font-size: 28px; /* Size of the text */
-      font-weight: 400; /* A thinner, cleaner weight */
-      color: #000000; /* Solid black */
-      display: flex;
-      align-items: center; /* Keeps both words on the same line */
-      white-space: nowrap; /* FORCES it to stay on one line no matter what */
+      font-size: 26px; /* Adjust size as needed */
+      font-weight: 400; 
+      color: #000000; 
+      letter-spacing: 8px; /* Wide spacing */
+      white-space: nowrap; /* Forces it to stay on one line */
+      
+      /* This creates the line */
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px; /* Space between text and line */
+      
+      /* CRITICAL FIX: Pulls the right side in to counteract the extra letter-spacing */
+      margin-right: -8px; 
+    }
+
+    /* This draws the line exactly under the text */
+    .logo-text::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0; /* Stretches exactly from left to right of the text */
+      height: 1px; /* Thin line */
+      background-color: #000000;
     }
 
     .logo-text .quant {
       letter-spacing: 8px; /* Wide spacing between Q-U-A-N-T */
       margin-right: 10px; /* Adds a bit of space between the two words */
-    }
-
-    .logo-text .acuity {
-      letter-spacing: 8px; 
-      position: relative; 
-      padding-bottom: 10px; 
-      margin-right: -8px; 
     }
 
 
@@ -1170,7 +1181,7 @@
 <header>
   <div class="logo-block">
     <div class="logo-text" aria-label="Quant Acuity logo">
-      <span class="quant">QUANT</span> <span class="acuity">ACUITY</span>
+      QUANT ACUITY
     </div>
   </div>
   </div>
