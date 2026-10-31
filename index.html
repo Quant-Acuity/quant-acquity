@@ -31,6 +31,7 @@
     /* ---------- fixed header ---------- */
     :root {
       --header-h: 100px;
+      --nav-h: 54px;   /* header height once the logo has slid away */
     }
 
     header {
@@ -46,10 +47,16 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 14px;
+      gap: 0;
+      overflow: hidden;
       border-bottom: 1px solid #e6e9f0;
       box-shadow: 0 2px 14px rgba(11, 28, 46, 0.06);
-      transition: box-shadow 0.25s ease;
+      transition: height 0.35s ease, box-shadow 0.25s ease;
+    }
+
+    /* scrolling down: logo slides up out of view, only the menu stays */
+    header.compact {
+      height: var(--nav-h);
     }
 
     header.scrolled {
@@ -67,6 +74,19 @@
     .logo-block {
       flex-direction: column;
       gap: 7px;
+      max-height: 40px;
+      margin-bottom: 14px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: max-height 0.35s ease, margin-bottom 0.35s ease,
+                  opacity 0.25s ease, transform 0.35s ease;
+    }
+    header.compact .logo-block {
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+      transform: translateY(-14px);
+      pointer-events: none;
     }
     .logo-text {
       font-family: 'Montserrat', 'Inter', sans-serif;
@@ -990,7 +1010,7 @@
 
     /* scroll margin */
     #services, #contact, #dataset, #models {
-      scroll-margin-top: var(--header-h);
+      scroll-margin-top: var(--nav-h);
     }
 
     /* ---------- responsive ---------- */
@@ -1076,10 +1096,13 @@
     @media (max-width: 700px) {
       :root {
         --header-h: 88px;
+        --nav-h: 48px;
       }
       header {
-        gap: 10px;
         padding: 0 16px;
+      }
+      .logo-block {
+        margin-bottom: 10px;
       }
       .logo-text {
         font-size: 14px;
@@ -1852,7 +1875,7 @@
           const targetId = href.substring(1);
           const target = document.getElementById(targetId);
           if (target) {
-            const offset = header.offsetHeight;
+            const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 54;
             const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top: pos, behavior: 'smooth' });
           } else if (targetId === 'home') {
@@ -1862,10 +1885,20 @@
       });
     });
 
-    // header shadow on scroll
+    // header: hide logo on scroll down, bring it back on scroll up
+    let lastY = window.scrollY;
     window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 10);
-    });
+      const y = window.scrollY;
+      header.classList.toggle('scrolled', y > 10);
+      if (y <= 10) {
+        header.classList.remove('compact');
+      } else if (y > lastY + 4 && y > 80) {
+        header.classList.add('compact');
+      } else if (y < lastY - 4) {
+        header.classList.remove('compact');
+      }
+      lastY = y;
+    }, { passive: true });
   })();
 </script>
 
