@@ -75,19 +75,18 @@
 
     .logo-text {
       font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      font-size: 26px; /* Adjust size as needed */
+      font-size: 16px; /* Reduced from 26px to 16px (adjust this to your liking) */
       font-weight: 400; 
       color: #000000; 
-      letter-spacing: 8px; /* Wide spacing */
-      white-space: nowrap; /* Forces it to stay on one line */
+      letter-spacing: 5px; /* Reduced from 8px */
+      white-space: nowrap; 
       
-      /* This creates the line */
       position: relative;
       display: inline-block;
-      padding-bottom: 10px; /* Space between text and line */
+      padding-bottom: 6px; /* Reduced from 10px to bring the line closer */
       
-      /* CRITICAL FIX: Pulls the right side in to counteract the extra letter-spacing */
-      margin-right: -8px; 
+      /* Make sure this matches your new letter-spacing exactly */
+      margin-right: -5px; 
     }
 
     /* This draws the line exactly under the text */
@@ -96,8 +95,8 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      right: 0; /* Stretches exactly from left to right of the text */
-      height: 1px; /* Thin line */
+      right: 0; 
+      height: 1px; 
       background-color: #000000;
     }
 
