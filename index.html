@@ -39,7 +39,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(230, 233, 240, 0.6);
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
       transition: box-shadow 0.2s, background 0.3s;
     }
@@ -82,6 +81,13 @@
       white-space: nowrap; 
       display: flex;
       align-items: center;
+      margin-right: -5px; /* Fixes the trailing letter-spacing issue */
+    }
+
+    /* Forces the space between the words to be visible */
+    .logo-text .spacer {
+      display: inline-block;
+      width: 15px; /* Adjust this number to make the gap larger or smaller */
     }
 
     .line-start {
@@ -94,13 +100,15 @@
       position: relative;
     }
 
-    /* This draws the line between them */
+    /* The connecting line */
     .line-start::after {
       content: '';
       position: absolute;
-      bottom: -6px; /* Pushes the line down below the text */
+      bottom: -8px; /* Distance from text to line */
       left: 0; 
-      width: calc(100% + 1em); /* Stretches across the T, the space, and the A */
+      /* This perfectly spans from the start of T to the end of A, 
+         including the space we created */
+      width: calc(100% + 15px + 1em); 
       height: 1px;
       background-color: #000000;
     }
@@ -1196,7 +1204,7 @@
 <header>
   <div class="logo-block">
     <div class="logo-text" aria-label="Quant Acuity logo">
-      QUAN<span class="line-start">T</span> <span class="line-end">A</span>CUITY
+      QUAN<span class="line-start">T</span><span class="spacer"> </span><span class="line-end">A</span>CUITY
     </div>
   </div>
   </div>
