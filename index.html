@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
   <title>Quant Acuity · Intelligence in data</title>
   <style>
     * {
@@ -30,7 +30,7 @@
 
     /* ---------- fixed header ---------- */
     :root {
-      --header-h: 84px;
+      --header-h: 100px;
     }
 
     header {
@@ -43,8 +43,10 @@
       background: #ffffff; /* solid, so page content never shows through */
       padding: 0 48px;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
+      gap: 14px;
       border-bottom: 1px solid #e6e9f0;
       box-shadow: 0 2px 14px rgba(11, 28, 46, 0.06);
       transition: box-shadow 0.25s ease;
@@ -61,11 +63,26 @@
       text-decoration: none;
     }
 
-    /* Logo image: transparent PNG, same look as the supplied logo */
-    .logo-block img {
+    /* Wordmark: spaced capitals with a short rule underneath */
+    .logo-block {
+      flex-direction: column;
+      gap: 7px;
+    }
+    .logo-text {
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      letter-spacing: 0.42em;
+      margin-right: -0.42em; /* cancel trailing spacing so it centres exactly */
+      text-transform: uppercase;
+      color: #111111;
+      line-height: 1;
+    }
+    .logo-rule {
       display: block;
-      height: 30px;
-      width: auto;
+      width: 36px;
+      height: 1px;
+      background: #111111;
     }
 
     nav {
@@ -76,7 +93,7 @@
 
     nav a {
       text-decoration: none;
-      color: #5b6472;          /* darker grey */
+      color: #6b7280;
       font-size: 15px;
       font-weight: 300;        /* light, not bold */
       letter-spacing: 0.3px;
@@ -1058,17 +1075,16 @@
 
     @media (max-width: 700px) {
       :root {
-        --header-h: 92px;
+        --header-h: 88px;
       }
-      /* two tidy rows on phones: logo on top, menu underneath */
       header {
-        flex-direction: column;
-        justify-content: center;
         gap: 10px;
         padding: 0 16px;
       }
-      .logo-block img {
-        height: 22px;
+      .logo-text {
+        font-size: 14px;
+        letter-spacing: 0.36em;
+        margin-right: -0.36em;
       }
       nav {
         gap: 22px;
@@ -1142,7 +1158,8 @@
 <!-- ========== FIXED HEADER ========== -->
 <header>
   <a class="logo-block" href="#home" aria-label="Quant Acuity home">
-    <img src="logo.png" alt="Quant Acuity" />
+    <span class="logo-text">Quant Acuity</span>
+    <span class="logo-rule"></span>
   </a>
   <nav>
     <a href="#home">Home</a>
